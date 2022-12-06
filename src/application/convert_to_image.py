@@ -1,6 +1,6 @@
 """Pipeline for looping over subdirectories in a given directory, 
-finding pdfs, check whether those pdfs are valid, transforming them into images per page, 
-extracting text from images, saving text per image (page) into json"""
+finding pdfs, checking whether those pdfs are valid, transforming them into images per page, 
+extracting text from images, saving text per image (page) per pdf into json"""
 
 from pdf2image import convert_from_path
 import pandas as pd
@@ -9,7 +9,7 @@ import os
 import json
 import glob
 
-ROOT_DIR = "/media/kate/Seagate Expansion Drive/kasper-eu/eur-lex/"
+ROOT_DIR = "/data_archive/eu-ethics-temp/data/"
 subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive = True)
 
 path_to_tesseract = r"/usr/bin/tesseract"
@@ -37,10 +37,17 @@ for dir in subdirectories:
                 dataset.append(dic)
             
                 data = json.dumps(dataset, ensure_ascii=False, indent=2)
+
                 name = file.split(".pdf")[0]
-                file_name = f"{name}_parsed.json"
+                folder_label = dir.split("/")[-2]
+                file_name = f"{name}.json"
+                folder_path = os.path.join(ROOT_DIR, f"parsed_pdf_per_page/{folder_label}/")
+                save_file_to = os.path.join(folder_path, file_name)
+
+                if not os.path.exists(folder_path):
+                        os.mkdir(folder_path)
             
-                with open(f"{dir}_parsed/{file_name}", "w") as outfile:
+                with open(save_file_to, "w") as outfile:
                     outfile.write(data)
 
             except:
@@ -48,4 +55,4 @@ for dir in subdirectories:
                 continue
 
 df = pd.DataFrame(not_pdfs, columns=["files"])
-df.to_csv(f"not_pdfs/{dir}.csv")
+df.to_csv(os.path.join(ROOT_DIR, f"not_pdfs/{folder_label}.csv"))

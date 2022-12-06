@@ -1,22 +1,18 @@
-"""Pipluine for merging strings per page into a single text and saving all texts per doc per subdir into json"""
+"""Pipeline for merging strings per page into a single text i.e., all docs per keyword are saved into a single json"""
 
 import glob
 import json 
 import os 
 
-dir_names = ["humanism"]
-
-#or
-
-#ROOT_DIR = "/media/kate/Seagate Expansion Drive/kasper-eu/eur-lex/"
-#subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive = True)
-#dir_names = [name.split("/")[-2] for name in subdirectories]
-
-
-dataset = []
+ROOT_DIR = "/data_archive/eu-ethics-temp/data/"
+subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive = True)
+dir_names = [name.split("/")[-2] for name in subdirectories]
 
 for name in dir_names:
-    dir = f"{name}_parsed/"
+
+    dataset = []
+    dir = os.path.join(ROOT_DIR, f"parsed_pdf_per_page/{name}/")
+
     for file in os.listdir(dir):
         file_path = os.path.join(dir, file)
 
@@ -35,10 +31,10 @@ for name in dir_names:
             dic["text"] = doc
             dataset.append(dic)
 
-
+     
     json_data = json.dumps(dataset, ensure_ascii=False, indent=2)
+    
+    save_to_path = os.path.join(ROOT_DIR, f"merged_texts/{name}.json")
 
-    file_name = f"{name}_all_docs.json"
-            
-    with open(f"{dir}{file_name}", "w") as outfile:
+    with open(save_to_path, "w") as outfile:
         outfile.write(json_data)

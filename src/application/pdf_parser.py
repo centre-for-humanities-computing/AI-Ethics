@@ -1,23 +1,37 @@
-"""Pipeline for looping over subdirectories in a given directory, checking whether pdfs are valid, 
-transforming them into images, extracting text from images, saving text into .txt"""
-
-from pdf2image import convert_from_path
-import tesserocr
-import pytesseract
 import os
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.pdfpage import PDFPage
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+import io
+from tqdm import tqdm
 import glob
 import time 
 
 st = time.time()
 
+def pdfparser(data):
+
+    fp = open(data, 'rb')
+    rsrcmgr = PDFResourceManager()
+    retstr = io.StringIO()
+    laparams = LAParams()
+    device = TextConverter(rsrcmgr, retstr, laparams=laparams) 
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+
+    for page in PDFPage.get_pages(fp):
+        interpreter.process_page(page)
+        data =  retstr.getvalue()
+    return data
+
+
 ROOT_DIR = "../../../data/"
 subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive=True)
 
-path_to_tesseract = r"/usr/bin/tesseract"
-pytesseract.tesseract_cmd = path_to_tesseract
-
 for dir in subdirectories:
     if "pdfs" not in dir:
+        print(dir)
+
         folder_label = dir.split("/")[-2]
         folder_path = os.path.join(ROOT_DIR, f"parsed_pdfs/{folder_label}")
 
@@ -25,19 +39,17 @@ for dir in subdirectories:
             os.mkdir(folder_path)
 
         for file in os.listdir(dir):
+            print(file)
             txt_path = os.path.join(folder_path, f"{file}.txt")
             file_path = os.path.join(dir, file)
 
             try:
-                images = convert_from_path(file_path)
+                text = pdfparser(file_path)
                 txt = open(txt_path, "a")
-                for i in range(len(images)):
-                    text = tesserocr.image_to_text(images[i])
-                    txt.write(text)
+                txt.write(text)
 
             except:
                 continue
-
 
 elapsed_time = time.time() - st
 print('Execution time:', time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))

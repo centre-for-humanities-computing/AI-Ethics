@@ -1,11 +1,10 @@
 """Pipeline for transforming pdfs into images and extracting text from those images using tesserocr."""
-
 from pdf2image import convert_from_path
 import tesserocr
 import pytesseract
 import os
 import glob
-import time 
+import time
 
 st = time.time()
 
@@ -39,4 +38,4 @@ for dir in subdirectories:
 
 
 elapsed_time = time.time() - st
-print('Execution time:', time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
+print("Execution time:", time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))

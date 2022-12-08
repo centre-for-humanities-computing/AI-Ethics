@@ -1,5 +1,4 @@
 """Pipeline for preprocessing texts per key/folder (f.ex., ethics, science, etc.)."""
-
 import sys
 
 sys.path.append("../ethics")
@@ -17,7 +16,7 @@ ROOT_DIR = "../../../data/"
 subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive=True)
 
 for dir in subdirectories:
-    if "pdfs" not in dir: 
+    if "pdfs" not in dir:
 
         docs_per_folder = []
         files = []

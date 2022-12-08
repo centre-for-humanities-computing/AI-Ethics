@@ -7,22 +7,23 @@ from pdfminer.layout import LAParams
 import io
 from tqdm import tqdm
 import glob
-import time 
+import time
 
 st = time.time()
 
+
 def pdfparser(data):
 
-    fp = open(data, 'rb')
+    fp = open(data, "rb")
     rsrcmgr = PDFResourceManager()
     retstr = io.StringIO()
     laparams = LAParams()
-    device = TextConverter(rsrcmgr, retstr, laparams=laparams) 
+    device = TextConverter(rsrcmgr, retstr, laparams=laparams)
     interpreter = PDFPageInterpreter(rsrcmgr, device)
 
     for page in PDFPage.get_pages(fp):
         interpreter.process_page(page)
-        data =  retstr.getvalue()
+        data = retstr.getvalue()
     return data
 
 
@@ -54,4 +55,4 @@ for dir in subdirectories:
                 continue
 
 elapsed_time = time.time() - st
-print('Execution time:', time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
+print("Execution time:", time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))

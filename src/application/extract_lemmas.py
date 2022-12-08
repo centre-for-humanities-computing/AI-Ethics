@@ -12,7 +12,7 @@ nlp = spacy.load("en_core_web_lg")
 stops = open("../../stopwords.txt", "r")
 stops = stops.read().split()
 
-ROOT_DIR = "../../../data/"
+ROOT_DIR = "../../../data/w2v_test/"
 subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive=True)
 
 for dir in subdirectories:
@@ -22,17 +22,18 @@ for dir in subdirectories:
         files = []
 
         for file in os.listdir(dir):
-            file_path = os.path.join(dir, file)
-            files.append(file)
-            with open(file_path) as f:
-                text = f.read()
-                cleaned_text = clean_text(text)
-                lemmas = collect_lemmas(cleaned_text, nlp)
-                no_stops = rm_stops(lemmas, stops)
-                docs_per_folder.append(no_stops)
+            if file.endswith(".txt"):
+                file_path = os.path.join(dir, file)
+                files.append(file)
+                with open(file_path) as f:
+                    text = f.read()
+                    cleaned_text = clean_text(text)
+                    lemmas = collect_lemmas(cleaned_text, nlp)
+                    no_stops = rm_stops(lemmas, stops)
+                    docs_per_folder.append(no_stops)
 
-        key = dir.split("/")[-2]
-        df = pd.DataFrame(columns=["doc", "lemmas"])
-        df["doc"] = files
-        df["lemmas"] = docs_per_folder
-        df.to_csv(f"{dir}{key}_lemmas.csv", index=False)
+            key = dir.split("/")[-2]
+            df = pd.DataFrame(columns=["doc", "lemmas"])
+            df["doc"] = files
+            df["lemmas"] = docs_per_folder
+            df.to_csv(f"{dir}{key}_lemmas.csv", index=False)

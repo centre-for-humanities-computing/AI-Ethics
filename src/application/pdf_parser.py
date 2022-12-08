@@ -1,3 +1,4 @@
+"""Pipeline for extracting text from pdfs with pdfminer. This approach is faster than tesserocr but less accurate in terms of coherence for 2 column formated texts."""
 import os
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
@@ -40,7 +41,8 @@ for dir in subdirectories:
 
         for file in os.listdir(dir):
             print(file)
-            txt_path = os.path.join(folder_path, f"{file}.txt")
+            txt_name = file.split(".pdf")[0] + ".txt"
+            txt_path = os.path.join(folder_path, txt_name)
             file_path = os.path.join(dir, file)
 
             try:

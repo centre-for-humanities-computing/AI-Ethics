@@ -1,5 +1,4 @@
-"""Pipeline for looping over subdirectories in a given directory, checking whether pdfs are valid, 
-transforming them into images, extracting text from images, saving text into .txt"""
+"""Pipeline for transforming pdfs into images and extracting text from those images using tesserocr."""
 
 from pdf2image import convert_from_path
 import tesserocr

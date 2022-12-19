@@ -29,6 +29,11 @@ for dir in subdirectories:
             with open(file_path) as f:
                 text = f.read()
                 cleaned_text = clean_text(text)
+                text_length = len(cleaned_text)
+
+                if text_length > 100000:
+                    nlp.max_length = text_length + 50
+
                 lemmas = collect_lemmas(cleaned_text, nlp)
                 no_stops = rm_stops(lemmas, stops)
                 docs_per_folder.append(no_stops)

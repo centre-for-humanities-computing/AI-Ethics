@@ -6,7 +6,7 @@ import glob
 import ast
 
 
-ROOT_DIR = "../../../data/pdfs_parsed/"
+ROOT_DIR = "../../../data/parsed_pdfs/"
 subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive=True)
 
 
@@ -14,6 +14,8 @@ for dir in subdirectories:
     if "models" not in dir:
         for file in os.listdir(dir):
             if file.endswith(".csv"):
+                print(file)
+
                 csv_path = os.path.join(dir, file)
                 df = pd.read_csv(csv_path)
                 df["lemmas"] = df["lemmas"].apply(lambda x: ast.literal_eval(x))

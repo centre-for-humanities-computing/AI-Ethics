@@ -38,8 +38,8 @@ for dir in subdirectories:
                 no_stops = rm_stops(lemmas, stops)
                 docs_per_folder.append(no_stops)
 
-        key = dir.split("/")[-2]
-        df = pd.DataFrame(columns=["doc", "lemmas"])
-        df["doc"] = files
-        df["lemmas"] = docs_per_folder
-        df.to_csv(f"{dir}{key}_lemmas.csv", index=False)
+    key = dir.split("/")[-2]
+    df = pd.DataFrame(columns=["doc", "lemmas"])
+    df["doc"] = files
+    df["lemmas"] = docs_per_folder
+    df.to_csv(f"{dir}{key}_lemmas.csv", index=False)

@@ -1,31 +1,13 @@
 """Pipeline for extracting text from pdfs with pdfminer. This approach is faster than tesserocr but less accurate in terms of coherence for 2 column formated texts."""
+import sys
+
+sys.path.append("../ethics")
 import os
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.pdfpage import PDFPage
-from pdfminer.converter import TextConverter
-from pdfminer.layout import LAParams
-import io
-from tqdm import tqdm
 import glob
 import time
+from parser import pdfparser
 
 st = time.time()
-
-
-def pdfparser(data):
-
-    fp = open(data, "rb")
-    rsrcmgr = PDFResourceManager()
-    retstr = io.StringIO()
-    laparams = LAParams()
-    device = TextConverter(rsrcmgr, retstr, laparams=laparams)
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-
-    for page in PDFPage.get_pages(fp):
-        interpreter.process_page(page)
-        data = retstr.getvalue()
-    return data
-
 
 ROOT_DIR = "../../../data/"
 subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive=True)

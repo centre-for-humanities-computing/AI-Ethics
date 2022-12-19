@@ -33,7 +33,7 @@ def collect_lemmas(text: str, nlp) -> List[str]:
         List[str]: A list with lemmas.
     """
     lemmas = []
-    doc = nlp(text)
+    doc = nlp(text, disable = ['ner', 'parser'])
     for token in doc:
         lemmas.append(token.lemma_)
 

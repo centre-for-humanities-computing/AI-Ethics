@@ -35,7 +35,7 @@ All data is on `grundtvig` under `/data_archive/eu-ethics-temp/data` and organiz
 │   ├── sovereignty/
 │   │    └── ...       ---------> raw pdfs
 │   └── technology/
-│        └── ...       --------->  raw pdfs
+│        └── ...       ---------> raw pdfs
 └──
 
 ```
@@ -45,9 +45,9 @@ All data is on `grundtvig` under `/data_archive/eu-ethics-temp/data` and organiz
 ```
 ├── src/                        
 │   ├── application/
-│   │    ├── extract_lemmas.py          ---------> pipline for preprocessing (cleaning, lemmatization) .txt docs
+│   │    ├── extract_lemmas.py          ---------> pipeline for preprocessing (cleaning, lemmatization) .txt docs
 │   │    ├── extract_text_from_pdfs.py  ---------> pdf parser based on pdf -> images -> text pipeline  
-│   │    ├── pdf_parser.py              ---------> pdf parsering based on PDFResourceManager
+│   │    ├── pdf_parser.py              ---------> pdf parsering based on PDFResourceManager (all existing txt files are prepared with this pipeline)
 │   │    ├── w2v_all_keys.py            ---------> pipeline for training w2v based on all folders
 │   │    └── w2v_per_key.py             ---------> pipeline for training w2v per foder
 │   │

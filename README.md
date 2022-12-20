@@ -45,9 +45,11 @@ All data is on `grundtvig` under `/data_archive/eu-ethics-temp/data` and organiz
 ```
 ├── src/                        
 │   ├── application/
+│   │    ├── query/                     ---------> json files with most similar uni-, bi-, trigrams for seed words
 │   │    ├── extract_lemmas.py          ---------> pipeline for preprocessing (cleaning, lemmatization) .txt docs
 │   │    ├── extract_text_from_pdfs.py  ---------> pdf parser based on pdf -> images -> text pipeline  
 │   │    ├── pdf_parser.py              ---------> pdf parsering based on PDFResourceManager (all existing txt files are prepared with this pipeline)
+│   │    ├── query_seeds.py             ---------> script for findings the most similar uni-, bi-, trigrams for seed words
 │   │    ├── w2v_all_keys.py            ---------> pipeline for training w2v based on all folders
 │   │    └── w2v_per_key.py             ---------> pipeline for training w2v per foder
 │   │

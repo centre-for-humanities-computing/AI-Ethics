@@ -61,7 +61,7 @@ All data is on `grundtvig` under `/data_archive/eu-ethics-temp/data` and organiz
 
 ```
 
-# Usage 
+## Usage 
 The repo can be found under `/data_archive/eu-ethics-temp/`.
 
 If does not exist then:  
@@ -76,4 +76,12 @@ cd AI-Ethics
 pip install pip --upgrade
 
 pip install requirements.txt
+```
+
+## Run unit tests
+
+```
+cd tests/
+
+python -m  pytest
 ```

@@ -1,11 +1,11 @@
-"""Function for extarecting text from a pdf."""
-rom pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+"""Function for extracting text from a pdf."""
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 import io
 
-def pdfparser(data) -> str:
+def pdf_parser(data) -> str:
     """
     Extracts text from a pdf.
     Args:

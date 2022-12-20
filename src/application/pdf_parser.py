@@ -5,7 +5,7 @@ sys.path.append("../ethics")
 import os
 import glob
 import time
-from parser import pdfparser
+from pdf_parsering import pdf_parser
 
 st = time.time()
 
@@ -29,7 +29,7 @@ for dir in subdirectories:
             file_path = os.path.join(dir, file)
 
             try:
-                text = pdfparser(file_path)
+                text = pdf_parser(file_path)
                 txt = open(txt_path, "a")
                 txt.write(text)
 

@@ -1,4 +1,11 @@
+gensim==4.2.0
+pandas==1.1.5
 pdf2image==1.16.0
-Pillow==9.3.0
+pdfminer==20191125
+pdfminer.six==20211012
 pytesseract==0.3.8
+regex==2022.10.31
+spacy==3.4.3
 tesserocr==2.5.2
+en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.4.0/en_core_web_lg-3.4.0-py3-none-any.whl
+

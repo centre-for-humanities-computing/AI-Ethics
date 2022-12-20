@@ -19,15 +19,15 @@ All data is on `grundtvig` under `/data_archive/eu-ethics-temp/data` and organiz
 │   ├── innovation/
 │   │    └── ...       ---------> raw pdfs
 │   ├── parsed_pdfs/
-│   │      ├── human_rights/ ---------> parsed pdfs (not complete) saved into txt
+│   │      ├── human_rights/ ---------> parsed pdfs (not complete) saved into txt and csv with lemmas
 │   │      │    └── ...
-│   │      ├── humanism/     ---------> parsed pdfs saved into txt
+│   │      ├── humanism/     ---------> parsed pdfs saved into txt and csv with lemmas
 │   │      │     └── ...
-│   │      ├── innovation/   ---------> parsed pdfs saved into txt
+│   │      ├── innovation/   ---------> parsed pdfs saved into txt and csv with lemmas
 │   │      │     └── ...
 │   │      ├── models/       ---------> w2v models
 │   │      │     └── ...     
-│   │      └── science/      ---------> parsed pdfs saved into txt
+│   │      └── science/      ---------> parsed pdfs saved into txt and csv with lemmas
 │   │            └── ...  
 │   │      
 │   ├── science/       ---------> raw pdfs

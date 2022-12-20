@@ -17,7 +17,7 @@ subdirectories = glob.glob(f"{ROOT_DIR}*/", recursive=True)
 
 for dir in subdirectories:
     print(dir)
-    
+
     docs_per_folder = []
     files = []
 

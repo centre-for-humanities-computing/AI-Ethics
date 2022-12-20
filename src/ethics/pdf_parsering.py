@@ -5,6 +5,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 import io
 
+
 def pdf_parser(data) -> str:
     """
     Extracts text from a pdf.

@@ -1,7 +1,7 @@
 import sys
 
 sys.path.append("../src/ethics")
-from pdf_parsering import pdf_parser
+from pdf_parsing import pdf_parser
 
 
 def test_parser():

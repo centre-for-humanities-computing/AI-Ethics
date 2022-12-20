@@ -5,7 +5,7 @@ sys.path.append("../ethics")
 import os
 import glob
 import time
-from pdf_parsering import pdf_parser
+from pdf_parsing import pdf_parser
 
 st = time.time()
 

@@ -1,3 +1,4 @@
+"""Pipeline for finding the top-N most similar words."""
 from gensim.models import Word2Vec
 import os
 import json
@@ -27,20 +28,24 @@ seed_list = [
     "ai_and_ethics",
 ]
 
+
 for file in os.listdir(ROOT_DIR):
-    model = Word2Vec.load(file)
-    dataset = []
-    for seed in seed_list:
-        file_dict = {}
-        try:
-            similar = model.wv.most_similar(seed, topn=10)
-            file_dict[seed] = similar
-        except KeyError:
-            continue
-        dataset.append(file_dict)
+    if "npy" not in file:
+        file_path = os.path.join(ROOT_DIR, file)
+        model = Word2Vec.load(file_path)
 
-    data = json.dumps(dataset, ensure_ascii=False, indent=2)
-    file_name = "query/" + file + ".json"
+        dataset = []
+        for seed in seed_list:
+            file_dict = {}
+            try:
+                similar = model.wv.most_similar(seed, topn=10)
+                file_dict[seed] = similar
+            except KeyError:
+                continue
+            dataset.append(file_dict)
 
-    with open(file_name, "w") as outfile:
-        outfile.write(data)
+        data = json.dumps(dataset, ensure_ascii=False, indent=2)
+        file_name = "query/" + file + ".json"
+
+        with open(file_name, "w") as outfile:
+            outfile.write(data)

@@ -33,5 +33,5 @@ for dir in subdirectories:
 
                 w2v_model = Word2Vec(sentences=trigrams, sg=1)
                 label = dir.split("/")[-2]
-                path_w2v = f"{ROOT_DIR}/models/w2v_trigrams{label}"
+                path_w2v = f"{ROOT_DIR}/models/w2v_trigrams_{label}"
                 w2v_model.save(path_w2v)

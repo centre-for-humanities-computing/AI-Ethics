@@ -43,6 +43,8 @@ All data is on `grundtvig` under `/data_archive/eu-ethics-temp/data` and organiz
 ## Repo structure 
 
 ```
+├── models/            ---------> w2v models
+│    └── ...
 ├── src/                        
 │   ├── application/
 │   │    ├── query/                     ---------> json files with most similar uni-, bi-, trigrams for seed words
